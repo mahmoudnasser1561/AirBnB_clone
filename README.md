@@ -1,2 +1,1 @@
-# AirBnB_clone
-this is the AirBnB clone project repo
+This is the AirBnB project repo
