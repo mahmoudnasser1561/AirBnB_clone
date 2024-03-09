@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import codecs
 import os
 import json
 from models.base_model import BaseModel
@@ -41,7 +41,7 @@ class FileStorage:
 		
 		"""
 		if os.path.isfile(FileStorage.__file_path):
-			with open(FileStorage.__file_path, "r", encoding = "utf-8") as file:
+			with codecs.open(FileStorage.__file_path, "r", encoding = "utf-8") as file:
 				try:
 					obj_dict = json.load(file)
 					for key, value in obj_dict.items():

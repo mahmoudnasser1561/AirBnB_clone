@@ -1,12 +1,27 @@
 #!/usr/bin/python3
 
 import cmd
-import re
 import json
-from models.base_model import BaseModel
-from models import storage
 
-
-class HBNB(cmd.Cmd):
-	""" This is the class for the command interpreter """
+class HBNBCommand(cmd.Cmd):
+	"""
+		
+	"""
 	prompt = "(hbnb) "
+	
+	def do_quit(self, arg):
+		"""
+		"""
+		return True
+	def help_quit(self, args):
+		print("Quit command to exit the program")
+
+	def do_EOF(self, arg):
+		"""
+		
+		"""
+		print()
+		return True
+
+if __name__ == "__main__":
+	HBNBCommand().cmdloop()
