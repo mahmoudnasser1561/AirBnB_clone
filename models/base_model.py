@@ -2,6 +2,7 @@
 
 import uuid #this is for the unique id generation
 from datetime import datetime	
+import models
 
 class BaseModel:
 	def __init__(self, *args, **kwargs):
@@ -17,14 +18,14 @@ class BaseModel:
 					setattr(self, key, value)
 		else:
 			self.id = str(uuid.uuid4())
-
+		models.storage.new(self)
 		# this is the setting of the attributes of the Model
 		self.id = str(uuid.uuid4())
 		self.created_at = datetime.utcnow()
 		self.updated_at = datetime.utcnow()
 	def save(self):
 		self.updated_at = datetime.utcnow()
-		
+		models.storage.save()
 	def to_dict(self):
 		instance_dict = self.__dict__.copy()
 		instance_dict["__class__"] = self.__class__.__name__
