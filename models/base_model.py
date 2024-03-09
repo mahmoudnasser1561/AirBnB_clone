@@ -1,12 +1,24 @@
 #!/usr/bin/python3
 
-import uuid
-
-from datetime import datetime
+import uuid #this is for the unique id generation
+from datetime import datetime	
 
 class BaseModel:
-	def __init__(self):
-		# this is 
+	def __init__(self, *args, **kwargs):
+		
+		time_format = "%Y-%m-%dT%H:%M:%S.%f" 
+		if kwargs:
+			for key, value in kwargs.items():
+				if key == "__class__":
+					continue #don't do anything
+				elif key == "created_at" or "updated_at":
+					setattr(self, key, datetime.strptime(value, time_format))
+				else:
+					setattr(self, key, value)
+		else:
+			self.id = str(uuid.uuid4())
+
+		# this is the setting of the attributes of the Model
 		self.id = str(uuid.uuid4())
 		self.created_at = datetime.utcnow()
 		self.updated_at = datetime.utcnow()
@@ -22,7 +34,7 @@ class BaseModel:
 		return instance_dict
 
 	
-	def __str__(self):
+	def __str__(self): # returns a string representation of the Object
 		class_name = self.__class__.__name__
 		return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
 
